@@ -1,0 +1,31 @@
+#1)Find the producer names along with the count of movies they have produced that won an award?
+SELECT producer, COUNT(movie_title) AS count_of_movies
+FROM movies
+INNER JOIN winners ON winners.movie_title = movies.title
+GROUP BY producer;
+
+
+#2)Find the names of all movies along with the count of nominations they received and arrange in descending order?
+select movie_title , count(*)  as count_of_nominations from nominees
+group by movie_title
+order by  count_of_nominations desc;
+
+
+#3)Find the names of all producers who have produced movies that were both nominated and won an award?
+select  distinct producer  from movies
+inner join nominees
+on
+movies.title=nominees.movie_title
+inner join  winners
+on
+nominees.movie_title=winners.movie_title;
+
+
+#4)Which category Cillian Murphy and Robert Downey Jr. won the award ?
+select distinct  category from winners
+where winner_name in ("Cillian Murphy" and "Robert Downey Jr.");
+
+
+#5)Retrieve the count of winners for each category from the Winners table?
+select  category , count(winner_name) from winners
+group by category;
